@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function criaPessoa(nome, nota, sexo, idade) {
+            return {
+                nome: nome,
+                nota: nota,
+                sexo: sexo,
+                idade: idade,
+            }
+        }
+
+
+
+        const listaPessoa = [];
+        const qtdPessoa = 2;
+
+        for (let index = 0; index < qtdPessoa; index++) {
+
+            const nome = prompt(`Digite o nome da pessoa ${index}:`)
+            const nota = parseInt(prompt(`Digite a nota da pessoa ${index}: (1 a 4)`));
+            const sexo = prompt(`Digite o sexo da pessoa ${index}:`)
+            const idade = parseInt(prompt(`Digite o idade da pessoa ${index}:`));
+
+            const pessoa = criaPessoa(nome, nota, sexo, idade);
+            listaPessoa.push(pessoa)
+        }
+
+        const mediaIdade = listaPessoa.reduce(function (prev, next) {
+            return prev.idade + next.idade
+        }) / listaPessoa.length;
+
+        const menorIdade = listaPessoa.reduce(function (prev, next) {
+            return prev.idade < next.idade ? prev.idade : next.idade;
+        });
+
+        const maiorIdade = listaPessoa.reduce(function (prev, next) {
+            return prev.idade > next.idade ? prev.idade : next.idade;
+        });
+
+
+        var qtdHomem = 0;
+        var qtdMulher = 0;
+        var qtdBomOtimo = 0;
+        var qtdPessimo = 0;
+        listaPessoa.forEach(function (pessoa) {
+
+            if (pessoa.sexo == "M") {
+                qtdHomem++
+            } else if (pessoa.sexo == "F") {
+                qtdMulher++
+            }
+
+            if(pessoa.nota == 1){
+                qtdPessimo++;
+            }else if(pessoa.nota == 3 || pessoa.nota == 4){
+                qtdBomOtimo++
+            }
+
+
+        })
+
+        const percBomOtimo = `${(qtdBomOtimo*100)/listaPessoa.length}%`;
+
+        const result = ` Media idades: ${mediaIdade} \n Maior idade: ${maiorIdade} \n Menor idade: ${menorIdade} \n Qtd pessimo: ${qtdPessimo} \n Porcentagem Bom/Otimo: ${percBomOtimo} \n Qtd Homens: ${qtdHomem} \n Qtd mulher: ${qtdMulher} \n`;
+        alert(result);
+    </script>
+</body>
+
+</html>
